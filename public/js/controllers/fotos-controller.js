@@ -1,7 +1,10 @@
-angular.module('alurapic').controller('FotosController', function($scope) {
+angular.module('alurapic').controller('FotosController', function($scope, $http) {
 
-    $scope.foto = {
-        titulo: "Leão",
-        url: "https://cdn.leroymerlin.com.br/products/quadro_leao_bronze_100x100cm_90658085_0001_600x600.jpg"
-    }
+    $scope.fotos = [];
+
+    $http.get('v1/fotos')
+    .success((fotos) => {
+        $scope.fotos = fotos;
+    })
+    .error((erro) => console.log(erro))
 });
